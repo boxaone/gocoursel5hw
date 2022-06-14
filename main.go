@@ -39,5 +39,5 @@ func main() {
 	fmt.Printf("Ми можемо купити %v груш\n", fToCop(WholeMoney)/fToCop(PearPrice))
 	fmt.Println("Скільки яблук ми можемо купити?")
 	fmt.Printf("Ми можемо купити %v яблук\n", fToCop(WholeMoney)/fToCop(ApplePrice))
-	fmt.Printf("Чи ми можемо купити 2 груші та 2 яблука? %s!\n", boolToUkrStr(fToCop(WholeMoney) > 2*fToCop(ApplePrice)+2*fToCop(PearPrice)))
+	fmt.Printf("Чи ми можемо купити 2 груші та 2 яблука? %s!\n", boolToUkrStr(fToCop(WholeMoney) > 2*fToCop(PearPrice)+2*fToCop(ApplePrice)))
 }
