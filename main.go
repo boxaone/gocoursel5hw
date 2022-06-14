@@ -2,8 +2,8 @@ package main
 
 import "fmt"
 
-type Cop int32   // Кількість цілих копійок
-type Hrn float64 // Кількість цілих копійок
+type Cop int32   // Тип копійок
+type Hrn float64 // Тип гривень
 
 const (
 	ApplePrice Hrn = 5.99  // Ціна яблук
