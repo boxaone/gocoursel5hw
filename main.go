@@ -34,7 +34,7 @@ func main() {
 
 	fmt.Printf("Ми маємо: %v грн взагалі\n", WholeMoney)
 	fmt.Println("Скільки грошей треба витратити, щоб купити 9 яблук та 8 груш?")
-	fmt.Printf("Щоб купити 9 яблук та 8 груш треба %v грн\n", copToF(fToCop(PearPrice)*9+fToCop(ApplePrice)*8))
+	fmt.Printf("Щоб купити 9 яблук та 8 груш треба %v грн\n", copToF(fToCop(ApplePrice)*9+fToCop(PearPrice)*8))
 	fmt.Println("Скільки груш ми можемо купити?")
 	fmt.Printf("Ми можемо купити %v груш\n", fToCop(WholeMoney)/fToCop(PearPrice))
 	fmt.Println("Скільки яблук ми можемо купити?")
