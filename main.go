@@ -15,7 +15,7 @@ func fToCop(grn float64) Cop {
 	return (Cop)(grn * 100)
 }
 
-// Переводимо копійки(цілі) а гривні(раціональні float64)
+// Переводимо копійки(цілі) в гривні(раціональні float64)
 func copToF(cop Cop) float64 {
 	return (float64)(cop) / 100
 }
