@@ -20,7 +20,7 @@ func copToF(cop Cop) float64 {
 	return (float64)(cop) / 100
 }
 
-// Виводимо
+// Виводимо boolean українською
 func boolToUkrStr(value bool) string {
 
 	if value {
