@@ -1,25 +1,34 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type Cop int     // Тип копійок
 type Hrn float64 // Тип гривень
 type Buy struct {
-	Apples int
-	Pears  int
+	Apples      int
+	Pears       int
+	Question    string
+	Answer      string
+	NeedBoolean bool
 }
 
+// Грошові константи
 const (
 	ApplePrice Hrn = 5.99  // Ціна яблук
 	PearPrice  Hrn = 7.00  // Ціна груш
 	WholeMoney Hrn = 23.00 // Грошей взагалі в наявності
 )
 
+// Змінні покупок
 var (
-	buy1 = &Buy{Apples: 9, Pears: 8}
-	buy2 = &Buy{Pears: int(hrnToCop(WholeMoney) / hrnToCop(PearPrice))}
-	buy3 = &Buy{Apples: int(hrnToCop(WholeMoney) / hrnToCop(ApplePrice))}
-	buy4 = &Buy{Pears: 2, Apples: 2}
+	buys = []*Buy{
+		{Apples: 9, Pears: 8, Question: "Скільки грошей треба витратити, щоб купити %s?", Answer: "Щоб купити %s треба %s грн"},
+		{Pears: int(hrnToCop(WholeMoney) / hrnToCop(PearPrice)), Question: "Скільки груш ми можемо купити?", Answer: "Ми можемо купити %s"},
+		{Apples: int(hrnToCop(WholeMoney) / hrnToCop(ApplePrice)), Question: "Скільки яблук ми можемо купити?", Answer: "Ми можемо купити %s"},
+		{Pears: 2, Apples: 2, Question: "Чи ми можемо купити %s?", Answer: "%s", NeedBoolean: true}}
 )
 
 // Переводимо гривні(раціональні) в копійки(цілі)
@@ -64,15 +73,29 @@ func buyToS(buy *Buy) string {
 	return s
 }
 
+// Фікс для видалення додаткових параметрів
+func extraParam(s string, pc int) string {
+	var ep string
+	count := strings.Count(s, "%s")
+
+	for i := count; i < pc; i++ {
+		ep = ep + "%.0s"
+	}
+
+	return ep
+}
+
 func main() {
 
 	fmt.Printf("Ми маємо: %v грн взагалі\n", WholeMoney)
-	fmt.Printf("Скільки грошей треба витратити, щоб купити %s?\n", buyToS(buy1))
-	fmt.Printf("Щоб купити %s треба %v грн\n", buyToS(buy1), buySum(buy1))
-	fmt.Println("Скільки груш ми можемо купити?")
-	fmt.Printf("Ми можемо купити %s\n", buyToS(buy2))
-	fmt.Println("Скільки яблук ми можемо купити?")
-	fmt.Printf("Ми можемо купити %s\n", buyToS(buy3))
-	fmt.Printf("Чи ми можемо купити %s? %s!\n", buyToS(buy4), boolToUkrStr(WholeMoney >= buySum(buy4)))
-
+	for _, buy := range buys {
+		fmt.Printf(buy.Question+extraParam(buy.Question, 1)+"\n", buyToS(buy))
+		var bs = buySum(buy)
+		var bss = fmt.Sprintf("%v", bs)
+		if buy.NeedBoolean {
+			fmt.Printf(buy.Answer+"\n", boolToUkrStr(WholeMoney >= bs))
+		} else {
+			fmt.Printf(buy.Answer+extraParam(buy.Answer, 2)+"\n", buyToS(buy), bss)
+		}
+	}
 }
