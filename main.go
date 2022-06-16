@@ -76,7 +76,7 @@ func buyToS(buy *Buy) string {
 // Фікс для видалення додаткових параметрів
 func extraParam(s string, pc int) string {
 	var ep string
-	count := strings.Count(s, "%s")
+	count := strings.Count(s, "%s") + strings.Count(s, "%v")
 
 	for i := count; i < pc; i++ {
 		ep = ep + "%.0s"
