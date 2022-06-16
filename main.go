@@ -48,6 +48,7 @@ func boolToUkrStr(value bool) string {
 	return "Ні"
 }
 
+// Виводить список того що купляється
 func buyToS(buy *Buy) string {
 	var s string
 	if buy.Apples > 0 {
