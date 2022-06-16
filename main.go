@@ -15,6 +15,11 @@ const (
 	WholeMoney Hrn = 23.00 // Грошей взагалі в наявності
 )
 
+var (
+	buy1 = Buy{Apples: 9, Pears: 8}
+	buy4 = Buy{Pears: 2, Apples: 2}
+)
+
 // Переводимо гривні(раціональні) в копійки(цілі)
 func hrnToCop(grn Hrn) Cop {
 	return (Cop)(grn * 100)
@@ -44,13 +49,11 @@ func boolToUkrStr(value bool) string {
 func main() {
 
 	fmt.Printf("Ми маємо: %v грн взагалі\n", WholeMoney)
-	buy1 := Buy{Apples: 9, Pears: 8}
 	fmt.Printf("Скільки грошей треба витратити, щоб купити %v яблук та %v груш?", buy1.Apples, buy1.Pears)
 	fmt.Printf("Щоб купити %v яблук та %v груш треба %v грн\n", buy1.Apples, buy1.Pears, buySum(&buy1))
 	fmt.Println("Скільки груш ми можемо купити?")
 	fmt.Printf("Ми можемо купити %v груш\n", hrnToCop(WholeMoney)/hrnToCop(PearPrice))
 	fmt.Println("Скільки яблук ми можемо купити?")
 	fmt.Printf("Ми можемо купити %v яблук\n", hrnToCop(WholeMoney)/hrnToCop(ApplePrice))
-	buy4 := Buy{Pears: 2, Apples: 2}
 	fmt.Printf("Чи ми можемо купити %v груші та %v яблука? %s!\n", buy4.Pears, buy4.Apples, boolToUkrStr(WholeMoney >= buySum(&buy4)))
 }
