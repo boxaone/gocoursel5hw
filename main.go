@@ -52,5 +52,5 @@ func main() {
 	fmt.Println("Скільки яблук ми можемо купити?")
 	fmt.Printf("Ми можемо купити %v яблук\n", hrnToCop(WholeMoney)/hrnToCop(ApplePrice))
 	buy4 := Buy{Pears: 2, Apples: 2}
-	fmt.Printf("Чи ми можемо купити %v груші та %v яблука? %s!\n", buy4.Pears, buy4.Apples, boolToUkrStr(WholeMoney > buySum(&buy4)))
+	fmt.Printf("Чи ми можемо купити %v груші та %v яблука? %s!\n", buy4.Pears, buy4.Apples, boolToUkrStr(WholeMoney >= buySum(&buy4)))
 }
